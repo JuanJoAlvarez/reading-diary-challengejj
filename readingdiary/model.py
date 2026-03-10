@@ -71,11 +71,26 @@ class Book:
 
 
 class ReadingDiary:
+    def __init__(self):
+        self.books: dict[str, Book] = {}
+
+    def add_book(self, isbn: str, title: str, author: str, pages: int) -> bool:
+        if isbn in self.books:
+            return False
+
+        book = Book(isbn, title, author, pages)
+        self.books[isbn] = book
+        return True
+
+    def search_by_isbn(self, isbn: str) -> Book | None:
+        return self.books.get(isbn)
+
+    def add_note_to_book(self, isbn: str, text: str, page: int, date: datetime) -> bool:
+        book = self.search_by_isbn(isbn)
+        if book is None:
+            return False
+        return book.add_note(text, page, date)
 
 
 
 
-
-from datetime import datetime
-
-# TODO: Add code here
