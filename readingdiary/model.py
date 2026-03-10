@@ -71,48 +71,9 @@ class Book:
 
 
 class ReadingDiary:
-    def __init__(self):
-        self.books: dict[str, Book] = {}
 
-    def add_book(self, isbn: str, title: str, author: str, pages: int) -> bool:
-        if isbn in self.books:
-            return False
 
-        book = Book(isbn, title, author, pages)
-        self.books[isbn] = book
-        return True
 
-    def search_by_isbn(self, isbn: str) -> Book | None:
-        return self.books.get(isbn)
-
-    def add_note_to_book(self, isbn: str, text: str, page: int, date: datetime) -> bool:
-        book = self.search_by_isbn(isbn)
-        if book is None:
-            return False
-        return book.add_note(text, page, date)
-
-    def rate_book(self, isbn: str, rating: int) -> bool:
-        book = self.search_by_isbn(isbn)
-        if book is None:
-            return False
-        return book.set_rating(rating)
-
-    def book_with_most_notes(self) -> Book | None:
-        if not self.books:
-            return None
-
-        max_notes = 0
-        result = None
-
-        for book in self.books.values():
-            if len(book.notes) > max_notes:
-                max_notes = len(book.notes)
-                result = book
-
-        if max_notes == 0:
-            return None
-
-        return result
 
 
 from datetime import datetime
