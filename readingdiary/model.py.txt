@@ -1,4 +1,3 @@
-# Al finalizar, copia y pega el código en este archivo
 from datetime import datetime
 
 
@@ -91,26 +90,3 @@ class ReadingDiary:
         if book is None:
             return False
         return book.add_note(text, page, date)
-
-    def rate_book(self, isbn: str, rating: int) -> bool:
-        book = self.search_by_isbn(isbn)
-        if book is None:
-            return False
-        return book.set_rating(rating)
-
-    def book_with_most_notes(self) -> Book | None:
-        if not self.books:
-            return None
-
-        max_notes = 0
-        result = None
-
-        for book in self.books.values():
-            if len(book.notes) > max_notes:
-                max_notes = len(book.notes)
-                result = book
-
-        if max_notes == 0:
-            return None
-
-        return result
